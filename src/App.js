@@ -68,23 +68,36 @@ const product = {
 // }
 
 export default function Example() {
-
   return (
     <div className="container mx-auto bg-red-300 h-screen flex">
-      <div className="bg-yellow-200 h-96 w-full flex drop-shadow-2xl">
-      <Tab.Group as="div" className="flex container mx-auto bg-green-800">
-        <Tab.List className="bg-green-300 w-1/6 drop-shadow-2xl">
-          {product.images.map(img => <Tab key={img.id} className="bg-blue-300 w-full h-10 my-2 drop-shadow-sm">{img.id}</Tab>)}  
-        </Tab.List>
-        <Tab.Panels className="bg-green-700 w-5/6">
-          {
-            product.images.map(img => (
-              <Tab.Panel key={img.id} className="bg-blue-200 w-full h-10 my-2 drop-shadow-sm">{img.id}</Tab.Panel>
-            ))
-          }
-          <div className="bg-green-200 drop-shadow-2xl">selected image</div>
-        </Tab.Panels>
-      </Tab.Group>
+      <div className="bg-yellow-200 w-full flex drop-shadow-2xl">
+        <Tab.Group as="div" className="flex container mx-auto">
+          <Tab.List className="bg-slate-100 w-1/12 drop-shadow-2xl">
+            {product.images.map((img) => (
+              <Tab
+                key={img.id}
+                className="w-full h-10 mb-2 drop-shadow-sm"
+              >
+                <img
+                  src={img.src}
+                  alt=""
+                  className="object-center object-cover rounded-sm"
+                />
+              </Tab>
+            ))}
+          </Tab.List>
+          <Tab.Panels className="bg-blue-300 w-11/12">
+            {product.images.map((img) => (
+              <Tab.Panel key={img.id}>
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="object-center object-cover w-full max-h-96"
+                />
+              </Tab.Panel>
+            ))}
+          </Tab.Panels>
+        </Tab.Group>
       </div>
       <div className="bg-slate-300 h-96 w-full drop-shadow-2xl">
         Product Details
