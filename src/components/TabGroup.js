@@ -63,32 +63,57 @@ const product = {
   ],
 };
 
-// function classNames(...classes) {
-//   return classes.filter(Boolean).join(" ");
-// }
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
-export default function Example() {
-
+export default function TabGroup() {
   return (
-    <div className="container mx-auto bg-red-300 h-screen flex">
-      <div className="bg-yellow-200 h-96 w-full flex drop-shadow-2xl">
-      <Tab.Group as="div" className="flex container mx-auto bg-green-800">
-        <Tab.List className="bg-green-300 w-1/6 drop-shadow-2xl">
-          {product.images.map(img => <Tab key={img.id} className="bg-blue-300 w-full h-10 my-2 drop-shadow-sm">{img.id}</Tab>)}  
+    <Tab.Group as="div" className="flex container mx-auto">
+      <div className="hidden w-1/6 sm:block bg-red-300">
+        <Tab.List className="flex flex-col w-full">
+          {/* THIS TAKES AN ID AS A SELECTION THAT WILL DETERMINE WHAT'S IN THE PANEL */}
+          {product.images.map((image) => (
+            <Tab
+              key={image.id}
+              className="bg-white rounded-md flex flex-col items-center justify-end cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50"
+            >
+              {({ selected }) => (
+                <>
+                  <span className="sr-only">{image.name}</span>
+                  <span className="rounded-md">
+                    <img
+                      src={image.src}
+                      alt=""
+                      className="object-center object-cover"
+                    />
+                  </span>
+                  <span
+                    className={classNames(
+                      selected ? "ring-yellow-500" : "ring-green-500",
+                      "absolute inset-0 rounded-md ring-2 ring-offset-2 pointer-events-none"
+                    )}
+                    aria-hidden="true"
+                  />
+                </>
+              )}
+            </Tab>
+          ))}
         </Tab.List>
-        <Tab.Panels className="bg-green-700 w-5/6">
-          {
-            product.images.map(img => (
-              <Tab.Panel key={img.id} className="bg-blue-200 w-full h-10 my-2 drop-shadow-sm">{img.id}</Tab.Panel>
-            ))
-          }
-          <div className="bg-green-200 drop-shadow-2xl">selected image</div>
-        </Tab.Panels>
-      </Tab.Group>
       </div>
-      <div className="bg-slate-300 h-96 w-full drop-shadow-2xl">
-        Product Details
-      </div>
-    </div>
+
+      <Tab.Panels className="w-5/6 bg-blue-300">
+        {product.images.map((image) => (
+          <Tab.Panel key={image.id}>
+            <img
+              src={image.src}
+              alt={image.alt}
+              className="object-center object-cover sm:rounded-lg"
+            />
+            {image.id}
+          </Tab.Panel>
+        ))}
+      </Tab.Panels>
+    </Tab.Group>
   );
 }
