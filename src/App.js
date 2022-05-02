@@ -63,16 +63,12 @@ const product = {
   ],
 };
 
-// function classNames(...classes) {
-//   return classes.filter(Boolean).join(" ");
-// }
-
 export default function Example() {
   return (
-    <div className="container mx-auto bg-red-300 h-screen flex">
-      <div className="bg-yellow-200 w-full flex drop-shadow-2xl">
+    <div className="container mx-auto flex">
+      <div className="w-full flex drop-shadow-2xl">
         <Tab.Group as="div" className="flex container mx-auto">
-          <Tab.List className="bg-slate-100 w-1/12 drop-shadow-2xl">
+          <Tab.List className="w-1/12 drop-shadow-2xl">
             {product.images.map((img) => (
               <Tab
                 key={img.id}
@@ -86,7 +82,7 @@ export default function Example() {
               </Tab>
             ))}
           </Tab.List>
-          <Tab.Panels className="bg-blue-300 w-11/12">
+          <Tab.Panels className="w-11/12">
             {product.images.map((img) => (
               <Tab.Panel key={img.id}>
                 <img
